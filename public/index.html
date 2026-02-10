@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Student Housing Hub</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="logo">Student Housing Hub</div>
+    <nav>
+      <a href="/">Home</a>
+      <a href="#">Properties</a>
+      <a href="#">List a Room</a>
+      <a class="login" href="/login.html">Login</a>
+      <a class="signup" href="/signup.html">Sign Up</a>
+    </nav>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="overlay">
+      <h1>Find Your Student Home</h1>
+      <p>The best place for students to find safe, affordable housing near campus.</p>
+
+      <div class="search-box">
+        <input type="text" id="city" placeholder="Enter city, university, or neighborhood">
+        <button onclick="searchRooms()">Search</button>
+      </div>
+    </div>
+  </section>
+
+  <pre id="output"></pre>
+
+  <script>
+    const API = "https://dapper-capybara-744d9c.netlify.app";
+    function searchRooms() {
+      const city = document.getElementById("city").value;
+
+      fetch(`/rooms/city/${city}`)
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById("output").textContent =
+            JSON.stringify(data, null, 2);
+        });
+    }
+  </script>
+
+</body>
+</html>
